@@ -4,6 +4,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 import 'AutoComplete/AutoComplete.dart';
+import 'CustomRadioButton.dart';
 import 'ShowDialog.dart';
 import 'Testfile.dart';
 
@@ -61,6 +62,11 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+
+                  RaisedButton(child:Text("CustomRadioButton"),onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomRadioButton()));
+                  },),
+
                   RaisedButton(child:Text("Show Carousel"),onPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>CarouselScreen()));
                   },),
