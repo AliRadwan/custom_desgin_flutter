@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 
@@ -15,6 +14,11 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
   bool value4=false;
 
   int radioValue=0;
+  int radioValue2=0;
+
+  bool name;
+  bool name1;
+
   String result;
   Color resultColor;
   @override
@@ -40,9 +44,9 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
             value4=newValue;
           });
         }),
-        Text("guss 2+2"),
-        Row(
-          children: [
+        Divider(),
+        const Text("guss 2+2"),
+        Row(children: [
             Radio(
               value: 3,
               groupValue: radioValue,
@@ -52,16 +56,52 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
                 });
               },
             ),
-            Text("4")
+          const   Text("4")
           ],
         ),
-        radioButton(value: 2),
+         radioButton(value: 2),
         radioButton(value: 5),
         radioButton(value: 7),
+        Divider(),
+        buildRadioListTitle(0,"Title1","SubTitle1"),
+        buildRadioListTitle(1,"Title2","SubTitle2"),
+        buildRadioListTitle(2,"Title3","SubTitle3"),
+        buildRadioListTitle(3,"Title4","SubTitle4"),
+        Divider(),
+        // CheckboxListTile(value: name ,onChanged: (value){
+        //   setState(() {
+        //     name = value;
+        //   });
+        // },title: Text("Name"),),
+
+        // CheckboxListTile(value: name1, onChanged: (value){
+        //   setState(() {
+        //     name1 = value;
+        //   });
+        // },title: Text("Name 1"),),
+
+        Divider(),
+
+
+
+
 
 
       ],
     ),);
+  }
+
+
+  RadioListTile buildRadioListTitle(val,text,subtext){
+    return RadioListTile(value: val, groupValue: radioValue2, onChanged:(value){
+      setState(() {
+        radioValue2=value;
+      });
+    },
+      title: Text(text),
+      subtitle: Text(subtext),
+      controlAffinity: ListTileControlAffinity.leading,
+    );
   }
 
   Widget switchListTitle({String title,String subtitle,bool currentValue, Function updateValue}){
@@ -85,6 +125,7 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
     ),);
     showDialog(context: context,child: ad);
   }
+
   Row radioButton({int value}){
     return Row(
       children: [

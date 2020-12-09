@@ -40,10 +40,10 @@ class _TestFileState extends State<TestFile> {
         children: [
           InkWell(
             onTap: ()=>_datePicker(context),
-              child: Text("${DateFormat.yMMMd().format(_selectedDate)}")),
+              child: Text("${DateFormat.Hm(_selectedDate)}")),
           InkWell(
               onTap: ()=>_datePicker(context),
-              child: Text("${DateFormat('yy-MMM-dd').format(_selectedDate)}")),
+              child: Text("${DateFormat('hh:mma').format(_selectedDate)}")),
           ...data.map((val){
             return Row(
               children: [
