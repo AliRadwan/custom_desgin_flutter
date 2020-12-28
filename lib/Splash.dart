@@ -13,7 +13,7 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home:Scaffold(
-        body: SplashScreen(
+        body: SplashScreen(image: Image.asset("assets/images/5.jpg",),
           seconds: 3,
           title: Text("this is text"),
           backgroundColor: Colors.greenAccent,

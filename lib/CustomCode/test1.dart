@@ -18,7 +18,7 @@ class TextPage extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 40,
               fontFamily: 'Roboto',
-              color: Colors.white),
+                color: Colors.deepPurple),
         ),
       ),
     );
