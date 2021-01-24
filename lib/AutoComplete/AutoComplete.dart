@@ -24,7 +24,7 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
   void getUsers() async {
     try {
       final response =
-      await http.get("https://jsonplaceholder.typicode.com/users");
+      await http.get("http://kacops.futuretechkw.com/api/Correspondences/FillSearchLists?userId=5");
       if (response.statusCode == 200) {
         users = loadUsers(response.body);
         print('Users: ${users.length}');
@@ -62,7 +62,7 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
           width: 10.0,
         ),
         Text(
-          user.email,
+          user.userFullName,
         ),
       ],
     );

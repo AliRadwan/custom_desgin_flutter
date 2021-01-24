@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ali_flutter_desgin/Splash.dart';
+import 'package:ali_flutter_desgin/CustomDesgin/Splash.dart';
 import 'package:flutter/material.dart';
 import 'package:page_view_indicator/page_view_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';

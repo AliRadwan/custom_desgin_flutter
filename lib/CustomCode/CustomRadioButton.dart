@@ -47,19 +47,14 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
         Divider(),
         const Text("guss 2+2"),
         Row(children: [
-            Radio(
-              value: 3,
+            Radio(value: 3,
               groupValue: radioValue,
               onChanged: (value){
                 setState(() {
                   radioValue=value;
-                });
-              },
-            ),
-          const   Text("4")
-          ],
-        ),
-         radioButton(value: 2),
+                }); },),
+        const Text("4")],),
+        radioButton(value: 2),
         radioButton(value: 5),
         radioButton(value: 7),
         Divider(),

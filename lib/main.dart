@@ -1,7 +1,7 @@
 import 'package:ali_flutter_desgin/DarkTheme/MyProvider.dart';
 import 'package:ali_flutter_desgin/Provider/CounterProvider.dart';
-import 'package:ali_flutter_desgin/Splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'CustomDesgin/Splash.dart';
 import 'PageView/MyPageView.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -3,15 +3,15 @@
 class User {
   int id;
   String name;
-  String email;
+  String userFullName;
 
-  User({this.id, this.name, this.email});
+  User({this.id, this.name, this.userFullName});
 
   factory User.fromJson(Map<String, dynamic> parsedJson) {
     return User(
       id: parsedJson["id"],
-      name: parsedJson["name"] as String,
-      email: parsedJson["email"] as String,
+      name: parsedJson["Username"] as String,
+      userFullName: parsedJson["UserFullName"] as String,
     );
   }
 }
