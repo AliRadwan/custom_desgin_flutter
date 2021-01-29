@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:ali_flutter_desgin/CustomCode/GridView.dart';
 import 'package:ali_flutter_desgin/CustomCode/Testfile.dart';
 import 'package:ali_flutter_desgin/CustomCode/test1.dart';
+import 'package:ali_flutter_desgin/CustomDesgin/TimerScreen.dart';
 import 'GridViewScreen.dart';
 import 'InteractiveScreen.dart';
 import 'OpenPDF.dart';
@@ -34,6 +35,8 @@ class MyDesignScreen extends StatefulWidget {
 class _MyDesignScreenState extends State<MyDesignScreen> {
   String _selectedLetter;
   List _letterList = ['a', 'b', 'c', 'd', 'e'];
+  double _fontSize = 30;
+  Color _color = Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +68,24 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
+
+                    DefaultTextStyle(style: TextStyle(fontSize: 12,color: Colors.cyan), child: Column(
+                      children: [
+                        Text("Hi there"),
+                        Text("Hi there"),
+                        Text("Hi there"),
+                      ],
+                    )),
+                    AnimatedDefaultTextStyle(
+                        duration: Duration(milliseconds: 500),
+                        style: TextStyle(fontSize: _fontSize,color: _color), child: Column(
+                      children: [
+                        Text("Hi there"),
+                        Text("Hi there"),
+
+                      ],
+                    )),
+
 
                     SizedBox(
                       height: 70,child: Card(
@@ -121,6 +142,12 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                       child: Text("ImagePickerScreen"),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => ImagePickerScreen()));
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text("TimerScreen"),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TimerScreen()));
                       },
                     ),
                     RaisedButton(
@@ -806,7 +833,13 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Random r = Random();
+          setState(() {
+            _fontSize = r.nextInt(50).toDouble();
+            _color = Color.fromRGBO(r.nextInt(256), r.nextInt(256), r.nextInt(256), 1);
+          });
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
