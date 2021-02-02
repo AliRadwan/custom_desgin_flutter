@@ -5,6 +5,7 @@ import 'package:ali_flutter_desgin/CustomCode/GridView.dart';
 import 'package:ali_flutter_desgin/CustomCode/Testfile.dart';
 import 'package:ali_flutter_desgin/CustomCode/test1.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/CustomAnimationScreen.dart';
+import 'package:ali_flutter_desgin/CustomDesgin/FadeInImage.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/TimerScreen.dart';
 import 'GridViewScreen.dart';
 import 'InteractiveScreen.dart';
@@ -139,6 +140,9 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                       fallbackWidth: 300,
                     ),
 
+                    InkWell(child: Hero(tag: 'img',child: FlutterLogo(size: 40,),),onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>MyFadeInImage()));
+                    },),
                     RaisedButton(
                       child: Text("CustomAnimationScreen"),
                       onPressed: () {
