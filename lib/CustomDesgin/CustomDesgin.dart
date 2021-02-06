@@ -7,6 +7,7 @@ import 'package:ali_flutter_desgin/CustomCode/test1.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/CustomAnimationScreen.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/FadeInImage.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/TimerScreen.dart';
+import 'package:page_transition/page_transition.dart';
 import 'GridViewScreen.dart';
 import 'InteractiveScreen.dart';
 import 'OpenPDF.dart';
@@ -141,66 +142,67 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                     ),
 
                     InkWell(child: Hero(tag: 'img',child: FlutterLogo(size: 40,),),onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>MyFadeInImage()));
+
+                      Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: MyFadeInImage()));
                     },),
 
                     RaisedButton(
                       child: Text("CustomAnimationScreen"),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>CustomAnimationScreen()));
+                        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: CustomAnimationScreen()));
+
                       },
                     ),
                     RaisedButton(
                       child: Text("ImagePickerScreen"),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ImagePickerScreen()));
-                      },
+                        Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: ImagePickerScreen()));
+                        },
                     ),
                     RaisedButton(
                       child: Text("TimerScreen"),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => TimerScreen()));
-                      },
+                        Navigator.push(context, PageTransition(type: PageTransitionType.topToBottom, child: TimerScreen()));
+                        },
                     ),
                     RaisedButton(
                       child: Text("OpenPDF "),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OpenPDF()));
-                      },
+                        Navigator.push(context, PageTransition(type: PageTransitionType.bottomToTop, child: OpenPDF()));
+                        },
                     ),
 
                     RaisedButton(
                       child: Text("InteractiveScreen"),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => InteractiveScreen()));
-                      },
+                        Navigator.push(context, PageTransition(type: PageTransitionType.scale, alignment: Alignment.bottomCenter, child: InteractiveScreen()));
+                        },
                     ),
                     RaisedButton(
                       child: Text("ListWheelScreen"),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ListWheelScreen()));
-                      },
+                        Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: ListWheelScreen()));
+                        },
                     ),
                     RaisedButton(
                       child: Text("DismissibleScreen"),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => DismissibleScreen()));
+                        Navigator.push(context, PageTransition(type: PageTransitionType.rotate, duration: Duration(milliseconds: 1000), child: DismissibleScreen()));
                       },
                     ),
-
 
                     RaisedButton(
                       child: Text("AnimatedAlignWidget"),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => AnimatedAlignWidget()));
-                      },
+                        Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeftWithFade, child: AnimatedAlignWidget()));
+                        },
                     ),
 
                     RaisedButton(
                       child: Text("OpenWebUrl"),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OpenWebUrl()));
-                      },
+                        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: OpenWebUrl()));
+                        },
                     ),
 
                     Placeholder(
