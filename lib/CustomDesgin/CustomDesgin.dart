@@ -143,6 +143,7 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                     InkWell(child: Hero(tag: 'img',child: FlutterLogo(size: 40,),),onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context) =>MyFadeInImage()));
                     },),
+
                     RaisedButton(
                       child: Text("CustomAnimationScreen"),
                       onPressed: () {
