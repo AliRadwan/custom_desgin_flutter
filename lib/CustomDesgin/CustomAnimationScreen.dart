@@ -63,8 +63,6 @@ class _CustomAnimationScreenState extends State<CustomAnimationScreen> with Sing
       begin: TextStyle(color: Colors.red,fontWeight: FontWeight.bold,fontSize: 25),
       end: TextStyle(color: Colors.cyan,fontWeight: FontWeight.bold,fontSize: 55),
     ).animate(CurvedAnimation(parent: _controller,curve: Curves.linear));
-
-
     super.initState();
   }
 
@@ -74,6 +72,7 @@ class _CustomAnimationScreenState extends State<CustomAnimationScreen> with Sing
     _controller.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {

@@ -20,8 +20,6 @@ class _OpenWebUrlState extends State<OpenWebUrl> {
         child:RaisedButton(
           child: Text(str),
           onPressed: ()async{
-
-
          try{
            await canLaunch(url) ? await launch(url,enableJavaScript: true,forceWebView: true):throw"Can not open url";
          }catch(e){

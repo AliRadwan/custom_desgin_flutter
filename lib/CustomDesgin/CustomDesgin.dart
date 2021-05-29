@@ -7,9 +7,14 @@ import 'package:ali_flutter_desgin/CustomCode/test1.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/CustomAnimationScreen.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/FadeInImage.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/TimerScreen.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:like_button/like_button.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
+import 'package:slide_popup_dialog/slide_dialog.dart';
 import 'GridViewScreen.dart';
 import 'InteractiveScreen.dart';
+import 'ListViewSnapSheetExample.dart';
 import 'OpenPDF.dart';
 import 'OpenWebUrl.dart';
 import 'TransformScreen.dart';
@@ -29,21 +34,35 @@ import '../AutoComplete/AutoComplete.dart';
 import '../AutoComplete/CarouselScreen.dart';
 import '../Provider/ProviderCounterScreen.dart';
 import '../CustomCode/ShowDialog.dart';
+import 'modal_bottom_sheet.dart';
 
 class MyDesignScreen extends StatefulWidget {
+
+
   @override
   _MyDesignScreenState createState() => _MyDesignScreenState();
 }
+
+const  items={'ali','Ali','ahmed','alaa'};
+// const  items={'ali','ali','ahmed','alaa'};
 
 class _MyDesignScreenState extends State<MyDesignScreen> {
   String _selectedLetter;
   List _letterList = ['a', 'b', 'c', 'd', 'e'];
   double _fontSize = 30;
   Color _color = Colors.red;
+  bool isCheck;
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: GradientAppBar(
+        title: Text("app"),
+        gradient: LinearGradient(colors: [Colors.red, Colors.purple]),
+
+      ),
       drawer: MyDrawer(),
       body: SafeArea(
         top: true,
@@ -71,13 +90,12 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-
                     DefaultTextStyle(style: TextStyle(fontSize: 12,color: Colors.cyan), child: Column(
                       children: [
-                        Text("Hi there"),
-                        Text("Hi there"),
-                        Text("Hi there"),
-                      ],
+                        Chip(label:Text("Hi there"),),
+                        Text("Hi there"*5),
+                        Chip(label:Text('\$${444}'),),
+        ],
                     )),
                     AnimatedDefaultTextStyle(
                         duration: Duration(milliseconds: 500),
@@ -146,6 +164,32 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                       Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: MyFadeInImage()));
                     },),
 
+
+                    // Checkbox(value: isCheck,onChanged: (value){
+                    //   setState((){
+                    //     isCheck = ! isCheck;
+                    //   });
+                    // },),
+
+
+                    RaisedButton(
+                      child: Text("modal_bottom_sheet"),
+                      onPressed: () {
+                        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: MyBottomSheet()));
+
+                      },
+                    ),
+
+
+                    RaisedButton(
+                      child: Text("MySnappingSheet"),
+                      onPressed: () {
+                        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: ListViewSnapSheetExample()));
+
+                      },
+                    ),
+
+
                     RaisedButton(
                       child: Text("CustomAnimationScreen"),
                       onPressed: () {
@@ -205,6 +249,41 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                         },
                     ),
 
+                    Center(
+                      child: LikeButton(
+                        likeCount: 800,
+                      ),
+                    ),
+                    Center(
+                      child: LikeButton(
+                        size: 25,
+                        likeBuilder: (bool isLike){
+                          return Icon(
+                            Icons.add,size: 30,
+                            color: isLike?Colors.deepOrange:Colors.amber,
+                          );
+                        },
+
+                        onTap: onLikeButtonTapped,
+                        bubblesColor: BubblesColor(
+                          dotPrimaryColor: Colors.cyan,
+                          dotSecondaryColor: Colors.brown,
+                        ),
+                        circleColor: CircleColor(
+                          start: Colors.deepPurple,end: Colors.cyan
+                        ),
+                      ),
+                    ),
+                    RaisedButton(
+                      child: Text("slide popup"),
+                      onPressed: () {
+                        slideDialog.showSlideDialog(
+                          context: context,
+                          child: Text("Hello")
+                        );
+                      },
+                    ),
+
                     Placeholder(
                       strokeWidth: 3.0,
                       color: Colors.pink,
@@ -224,8 +303,9 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                               color: Colors.purple,
                               // shape: BoxShape.circle, // if you want circle, default is rectangle
                               gradient: LinearGradient(
-                                  colors: [Colors.pink, Colors.lightBlueAccent],
+                                  colors: [Colors.pink, Colors.lightBlueAccent,Colors.red],
                                   begin: Alignment.bottomLeft,
+                                  stops: [0.2,0.5,0.7],
                                   end: Alignment.topRight),
 // adds border around the container
                               border: Border.all(
@@ -585,7 +665,6 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                       fallbackHeight: 60,
                       fallbackWidth: 300,
                     ),
-
                     Container(
                       transform: Matrix4.rotationZ(0.2),
                       child: TextButton.icon(
@@ -595,14 +674,12 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                           icon: Icon(Icons.ad_units),
                           label: Text(" GridView Screen ")),
                     ),
-
                     Placeholder(
                       strokeWidth: 3.0,
                       color: Colors.pink,
                       fallbackHeight: 60,
                       fallbackWidth: 300,
                     ),
-
                     RaisedButton(
                       child: Text("Transform Screen"),
                       onPressed: () {
@@ -610,7 +687,6 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                             context, MaterialPageRoute(builder: (context) => TransformScreen()));
                       },
                     ),
-
                     Text('Selected Letter'),
                     DropdownButton(
                         value: _selectedLetter,
@@ -662,7 +738,6 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                         ),
                       ],
                     ),
-
                     RaisedButton(
                       child: Text("FutureScreen"),
                       onPressed: () {
@@ -680,7 +755,6 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                             builder: (ctx) => ProviderCounterScreen()));
                       },
                     ),
-
                     RaisedButton(
                       child: Text("CustomRadioButton"),
                       onPressed: () {
@@ -690,7 +764,6 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                                 builder: (context) => CustomRadioButton()));
                       },
                     ),
-
                     RaisedButton(
                       child: Text("Show Carousel"),
                       onPressed: () {
@@ -700,7 +773,6 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                                 builder: (context) => CarouselScreen()));
                       },
                     ),
-
                     RaisedButton(
                         child: Text("show FlushBar"),
                         onPressed: () {
@@ -720,7 +792,6 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                                   title: "This is message")
                               .show(context);
                         }),
-
                     const SelectableText(
                       "sdnkjsdnk lksdnlndlns lknsdlkndlnds lmlmdslmd ",
                       showCursor: true,
@@ -889,6 +960,9 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
       print("NO Image Selected");
     }
   }
+
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async => !isLiked;
 
 
 //****************************************************************************************

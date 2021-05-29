@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ali_flutter_desgin/CustomDesgin/Splash.dart';
 import 'package:flutter/material.dart';
 import 'package:page_view_indicator/page_view_indicator.dart';
+import 'package:shape_of_view/shape_of_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Data {
@@ -52,18 +53,28 @@ class _MyPageViewState extends State<MyPageView> {
               builder:(ctx)=> PageView(
                 controller: _controller,
                 children: myData
-                    .map((item) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(image: ExactAssetImage(item.imageUrl),fit: BoxFit.cover)
-                          ),child: Column(
+                    .map((item) => ClipRRect(
+                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(100)),
+                      child: ShapeOfView(
+                        shape: CutCornerShape(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                          ),
+                        ),
+                        child: Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(image: ExactAssetImage(item.imageUrl),fit: BoxFit.cover)
+                              ),child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(item.title),
-                    SizedBox(height: 10,),
-                    Text(item.description,textAlign: TextAlign.center,)
+                        Text(item.title),
+                        SizedBox(height: 10,),
+                        Text(item.description,textAlign: TextAlign.center,)
                   ],
                 ),
-                        ))
+                            ),
+                      ),
+                    ))
                     .toList(),
                 onPageChanged:(val){
                   pageIndexNotifier.value = val;

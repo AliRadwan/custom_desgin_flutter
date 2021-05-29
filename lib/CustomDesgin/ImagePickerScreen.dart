@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:ali_flutter_desgin/Widgets/Pickers/PickedImage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
@@ -15,7 +16,6 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
   File _image;
   final picker =ImagePicker();
   List<Asset> imgList  = List<Asset>();
-
   Future getImage (ImageSource src) async{
     final pickedFile = await picker.getImage(source: src);
     setState(() {
@@ -26,7 +26,6 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
       }
     });
   }
-
   Future loadAssets()async{
     try{
       await MultiImagePicker.pickImages(maxImages:300,
@@ -38,6 +37,11 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
         )
       );
     }catch(e){}
+  }
+
+  File _imageFile;
+  void _pickedImage(File pickedImage){
+    _imageFile = pickedImage;
   }
 
   @override
@@ -56,6 +60,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              PickedImage(),
               _image == null ?Text("Image Picker"):Image.file(_image),
               Container(
                 height: 500,
