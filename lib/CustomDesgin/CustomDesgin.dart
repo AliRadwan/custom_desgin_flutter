@@ -7,20 +7,27 @@ import 'package:ali_flutter_desgin/CustomCode/test1.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/CustomAnimationScreen.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/FadeInImage.dart';
 import 'package:ali_flutter_desgin/CustomDesgin/TimerScreen.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:like_button/like_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 import 'package:slide_popup_dialog/slide_dialog.dart';
+import 'AnimationAppBar.dart';
 import 'GridViewScreen.dart';
 import 'InteractiveScreen.dart';
 import 'ListViewSnapSheetExample.dart';
 import 'OpenPDF.dart';
 import 'OpenWebUrl.dart';
+import 'ShowConfirmDialog.dart';
+import 'Timeline/PackageDeliveryTrackingPage.dart';
+import 'Timeline/TimelineScreen.dart';
+import 'Timeline/TimelineStatusPage.dart';
 import 'TransformScreen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:marquee/marquee.dart';
-
+import 'dart:math' as math; // import this
 import 'AnimatedAlignWidget.dart';
 import '../CustomCode/CustomRadioButton.dart';
 import '../DarkTheme/MyDrawer.dart';
@@ -47,14 +54,13 @@ const  items={'ali','Ali','ahmed','alaa'};
 // const  items={'ali','ali','ahmed','alaa'};
 
 class _MyDesignScreenState extends State<MyDesignScreen> {
+  final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
   String _selectedLetter;
   List _letterList = ['a', 'b', 'c', 'd', 'e'];
   double _fontSize = 30;
   Color _color = Colors.red;
   bool isCheck;
-
-
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,6 +96,124 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
+
+                    SentMessage(message: "Hello this is cool"),
+                    ReceivedMessage(message: "Hi this is awesome chat bubble"),
+                    SentMessage(message: "How are you"),
+                    ReceivedMessage(message: "I am great how are you doing. It while when we talked."),
+                    SentMessage(message: "Now is good day to try something new and work on it. Stick to the plan"),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 20),
+                child: ExpansionTileCard(
+                  baseColor: Colors.cyan[50],
+                  expandedColor: Colors.red[50],
+                  key: cardA,
+                  leading: CircleAvatar(
+                      child: Image.asset("assets/images/devs.jpg")),
+                  title: Text("Flutter Dev's"),
+                  subtitle: Text("FLUTTER DEVELOPMENT COMPANY"),
+                  children: <Widget>[
+                    Divider(
+                      thickness: 1.0,
+                      height: 1.0,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: Text(
+                          "FlutterDevs specializes in creating cost-effective and efficient applications with our perfectly crafted,"
+                              " creative and leading-edge flutter app development solutions for customers all around the globe.",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              .copyWith(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.spaceAround,
+                      buttonHeight: 52.0,
+                      buttonMinWidth: 90.0,
+                      children: <Widget>[
+                        FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0)),
+                          onPressed: () {
+                            cardA.currentState?.expand();
+                          },
+                          child: Column(
+                            children: <Widget>[
+                              Icon(Icons.arrow_downward),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 2.0),
+                              ),
+                              Text('Open'),
+                            ],
+                          ),
+                        ),
+                        FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0)),
+                          onPressed: () {
+                            cardA.currentState?.collapse();
+                          },
+                          child: Column(
+                            children: <Widget>[
+                              Icon(Icons.arrow_upward),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 2.0),
+                              ),
+                              Text('Close'),
+                            ],
+                          ),
+                        ),
+                        FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0)),
+                          onPressed: () {
+                          },
+                          child: Column(
+                            children: <Widget>[
+                              Icon(Icons.swap_vert),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 2.0),
+                              ),
+                              Text('Toggle'),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+                    RaisedButton(
+                      child: Text("TimelineScreent"),
+                      onPressed: () {
+                        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: TimelineScreen()));
+
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text("TimelineStatusPage"),
+                      onPressed: () {
+                        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: TimelineStatusPage()));
+
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text("PackageDeliveryTrackingPage"),
+                      onPressed: () {
+                        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: PackageDeliveryTrackingPage()));
+
+                      },
+                    ),
+
                     DefaultTextStyle(style: TextStyle(fontSize: 12,color: Colors.cyan), child: Column(
                       children: [
                         Chip(label:Text("Hi there"),),
@@ -106,7 +230,29 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
 
                       ],
                     )),
+                    Container(
+                      width: 300,
+                      height: 200,
+                      margin: const EdgeInsets.only(top: 24, bottom: 16),
+                      decoration: ShapeDecoration(shape: InvertedBorder(radius: 32), color: Colors.brown),
+                    ),
 
+                    ClipPath(
+                      clipBehavior: Clip.hardEdge,
+                      clipper: ShapeBorderClipper(
+                          shape: BeveledRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(20.0),
+                                  bottomRight: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                  topLeft: Radius.circular(20.0)))),
+                      child: Container(
+                        width: 350,
+                        color: Colors.pink,
+                        height: 200,
+                        child: Container(),
+                      ),
+                    ),
 
                     SizedBox(
                       height: 70,child: Card(
@@ -172,10 +318,142 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
                     // },),
 
 
+                    PhysicalModel(
+                      elevation: 6.0,
+                      shape: BoxShape.circle,
+                      shadowColor: Colors.red,
+                      color: Colors.black,
+                      borderRadius: BorderRadius.all
+                        (Radius.circular(10)),
+                      child: Container(
+                        height: 120.0,
+                        width: 120.0,
+                      ),
+                    ),
+
+                    InkWell(
+                      onTap: () {
+
+                        // Show confirm dialog when clicked on widget
+                        showConfirmDialog(
+                          context,
+                          "Delete Service",
+                          "Do you want to delete service?",
+                          "Delete",
+                          "Cancel",
+                              () {
+                            // do stuff when clicked on delete
+                          },
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Icon(FeatherIcons.delete, color: Colors.black, size: 70),
+                          Text("Delete"),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Physical Model Widget in circle Box Shape',
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            PhysicalModel(
+                              elevation: 6.0,
+                              shape: BoxShape.circle,
+                              shadowColor: Colors.red,
+                              color: Colors.black,
+                              borderRadius: BorderRadius.all
+                                (Radius.circular(10)),
+                              child: Container(
+                                height: 120.0,
+                                width: 120.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              'Physical Model Widget in rectangle Box Shape',
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            PhysicalModel(
+                              elevation: 6.0,
+                              shape: BoxShape.rectangle,
+                              shadowColor: Colors.red,
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all
+                                (Radius.circular(10)),
+                              child: Container(
+                                height: 120.0,
+                                width: 120.0,
+                                color: Colors.blue[50],
+                                child: FlutterLogo(
+                                  size: 60,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    ClipPath(
+                      clipper: TriangleClipper(),
+                      child: Container(
+                        color: Colors.blueGrey,
+                        height: 200,
+                        width: 300,
+                      ),
+                    ),
+
+                    ClipPath(
+                      clipBehavior: Clip.hardEdge,
+                      clipper: ShapeBorderClipper(
+                          shape: BeveledRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(100.0),
+                                  bottomRight: Radius.circular(100.0),
+                                  topRight: Radius.circular(0.0),
+                                  topLeft: Radius.circular(0.0)))),
+                      child: Container(
+                        width: double.infinity,
+                        color: Colors.orange,
+                        height: 200,
+                        child: Container(),
+                      ),
+                    ),
+
                     RaisedButton(
                       child: Text("modal_bottom_sheet"),
                       onPressed: () {
                         Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: MyBottomSheet()));
+
+                      },
+                    ),
+
+                    RaisedButton(
+                      child: Text("AnimationAppBar"),
+                      onPressed: () {
+                        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: AnimationAppBar()));
 
                       },
                     ),
@@ -984,3 +1262,192 @@ class _MyDesignScreenState extends State<MyDesignScreen> {
 //****************************************************************************************
 
 
+//New class
+class TriangleClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.lineTo(size.width, 0.0);
+    path.lineTo(size.width / 2, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(TriangleClipper oldClipper) => false;
+}
+
+//New class
+class InvertedBorder extends ShapeBorder {
+  final double radius;
+  final double pathWidth;
+
+  InvertedBorder({@required this.radius, this.pathWidth = 3});
+
+  @override
+  EdgeInsetsGeometry get dimensions => EdgeInsets.zero;
+
+  @override
+  Path getInnerPath(Rect rect, {TextDirection textDirection}) {
+    return Path()
+      ..fillType = PathFillType.evenOdd
+      ..addPath(getOuterPath(rect, textDirection: textDirection), Offset.zero);
+  }
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection textDirection}) => _createPath(rect);
+
+  @override
+  void paint(Canvas canvas, Rect rect, {TextDirection textDirection}) {}
+
+  @override
+  ShapeBorder scale(double t) => InvertedBorder(radius: radius);
+
+  Path _createPath(Rect rect) {
+    final innerRadius = radius + pathWidth;
+    final innerRect = Rect.fromLTRB(rect.left + pathWidth, rect.top + pathWidth, rect.right - pathWidth, rect.bottom - pathWidth);
+
+    final outer = Path.combine(PathOperation.difference, Path()..addRect(rect), _createBevels(rect, radius));
+    final inner = Path.combine(PathOperation.difference, Path()..addRect(innerRect), _createBevels(rect, innerRadius));
+    return Path.combine(PathOperation.difference, outer, inner);
+  }
+
+  Path _createBevels(Rect rect, double radius) {
+    return Path()
+      ..addOval(Rect.fromCircle(center: Offset(rect.left, rect.top), radius: radius))
+      ..addOval(Rect.fromCircle(center: Offset(rect.left + rect.width, rect.top), radius: radius))
+      ..addOval(Rect.fromCircle(center: Offset(rect.left, rect.top + rect.height), radius: radius))
+      ..addOval(Rect.fromCircle(center: Offset(rect.left + rect.width, rect.top + rect.height), radius: radius));
+  }
+}
+
+
+class SentMessage extends StatelessWidget {
+  final String message;
+
+  const SentMessage({
+    Key key,
+    @required this.message,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final messageTextGroup = Flexible(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Container(
+                padding: EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.grey[900],
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(18),
+                    bottomLeft: Radius.circular(18),
+                    bottomRight: Radius.circular(18),
+                  ),
+                ),
+                child: Text(
+                  message,
+                  style: TextStyle(color: Colors.white,
+                      fontFamily: 'Monstserrat',
+                      fontSize: 14),
+                ),
+              ),
+            ),
+            CustomPaint(painter: Triangle(Colors.grey[900])),
+          ],
+        ));
+
+    return Padding(
+      padding: EdgeInsets.only(right: 18.0, left: 50, top: 5, bottom: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          SizedBox(height: 30),
+          messageTextGroup,
+        ],
+      ),
+    );
+  }
+}
+
+class ReceivedMessage extends StatelessWidget {
+  final String message;
+
+  const ReceivedMessage({
+    Key key,
+    @required this.message,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final messageTextGroup = Flexible(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(math.pi),
+              child: CustomPaint(
+                painter: Triangle(Colors.grey[300]),
+              ),
+            ),
+            Flexible(
+              child: Container(
+                padding: EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(18),
+                    bottomLeft: Radius.circular(18),
+                    bottomRight: Radius.circular(18),
+                  ),
+                ),
+                child: Text(
+                  message,
+                  style: TextStyle(color: Colors.black,
+                      fontFamily: 'Monstserrat',
+                      fontSize: 14),
+                ),
+              ),
+            ),
+          ],
+        ));
+
+    return Padding(
+      padding: EdgeInsets.only(right: 50.0, left: 18, top: 5, bottom: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          SizedBox(height: 30),
+          messageTextGroup,
+        ],
+      ),
+    );
+  }
+}
+
+class Triangle extends CustomPainter {
+  final Color bgColor;
+
+  Triangle(this.bgColor);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()..color = bgColor;
+
+    var path = Path();
+    path.lineTo(-5, 0);
+    path.lineTo(0, 10);
+    path.lineTo(5, 0);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
+}
