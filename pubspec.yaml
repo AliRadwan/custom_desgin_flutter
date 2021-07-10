@@ -55,7 +55,6 @@ dependencies:
   flutter_feather_icons:
   pinch_zoom_image_updated:
 
-
   http:
 
 dev_dependencies:
